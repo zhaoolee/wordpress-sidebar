@@ -6,32 +6,32 @@ WordPress是一个很优秀的建站工具, zhaoolee用WordPress建立了自己�
 
 1. 支持手动隐藏显示侧边栏
 
-![支持手动隐藏显示侧边栏](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235463455PAsaB4sM.gif)
+![支持手动隐藏显示侧边栏](https://cdn.fangyuanxiaozhan.com/assets/1653215307666P2S7QnCz.gif)
 
 
 2. 支持根据屏幕宽度判断显示/隐藏侧边目录(窗口宽度500px及以上显示侧边栏, 500px以下则隐藏侧边栏)
 
-![根据屏幕宽度判断显示/隐藏侧边目录](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235464695EZAtZcnf.gif)
+![根据屏幕宽度判断显示/隐藏侧边目录](https://cdn.fangyuanxiaozhan.com/assets/165321562348453F0jPYi.gif)
 
 
 3. 侧边栏内容, 支持根据当前网址加深颜色, 并滚动到侧边栏顶部
 
 
-![支持根据当前网址加深颜色, 并滚动到侧边栏顶部](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235468796w4K5P5sr.gif)
+![支持根据当前网址加深颜色, 并滚动到侧边栏顶部](https://cdn.fangyuanxiaozhan.com/assets/1653215891375MZS3nyi1.gif)
 
 
 4. 支持缓存侧边栏数据, 首次加载后, 侧边栏秒显示, 为了节省流量, 每次打开新页面, 程序会检测时间戳, 过期时间, 侧边栏数据超过10分钟, 才会重新拉取
 
 
-![支持缓存侧边栏数据](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235475702wCPhfHY4.png)
+![支持缓存侧边栏数据](https://cdn.fangyuanxiaozhan.com/assets/1653224410691MkC6H6NX.png)
 
 
 5. 支持通过油猴(Tampermonkey)插件, 为任意WordPress站生成目录
 
 
-![为任意WordPress站生成目录](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235476209R6sf5745.png)
+![为任意WordPress站生成目录](https://cdn.fangyuanxiaozhan.com/assets/1653216793258HazZ1cis.png)
 
-![油猴脚本](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/16532354820301idDbGcJ.png)
+![油猴脚本](https://cdn.fangyuanxiaozhan.com/assets/1653216913808RmEsdihH.png)
 
 ```
 // ==UserScript==
@@ -52,7 +52,7 @@ WordPress是一个很优秀的建站工具, zhaoolee用WordPress建立了自己�
 
 在页脚插入js脚本即可
 
-![在页脚插入脚本即可](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235482363DGBBTamm.png)
+![在页脚插入脚本即可](https://cdn.fangyuanxiaozhan.com/assets/1653217112598XeEDhSbX.png)
 
 ```
 <script src="https://www.v2fy.com/wordpress-sidebar/index.js"></script>
