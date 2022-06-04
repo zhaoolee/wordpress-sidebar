@@ -1,0 +1,75 @@
+#wordpress-sidebar {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 10px 10px 10px 10px;
+    border-bottom-right-radius: 10px;
+    overflow-y: scroll;
+    max-height: 80vh;
+    min-height: 120px;
+    word-break:break-all;
+    width: 200px;
+    border: 1px solid #cd2653;
+    border-top: 0;
+
+    .none-categories-a-list{
+        display: none;
+    }
+
+    .categories-a-list a[class="other-page"] {
+        color: #666666;
+        font-size: 16px;
+        text-decoration: none;
+        margin: 6px 0;
+
+    }
+    .categories-a-list a[class="other-page"]:hover{
+        color: #cd2653;
+
+    }
+
+    .categories-a-list a[class="current-page"] {
+        color: #cd2653;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        margin: 6px 0; 
+  
+    }
+
+    .categories-title{
+        color: #333333;
+        font-size: 24px;
+        font-weight: 600;
+        
+    }
+
+    .key-word-style{
+
+        font-weight: 800;
+        color: #cd2653;
+    }
+
+    .flow-wave {
+        font-weight: 800;
+        background: radial-gradient(circle at 10px -7px, transparent 8px, currentColor 8px, currentColor 9px, transparent 9px) repeat-x,
+                    radial-gradient(circle at 10px 27px, transparent 8px, currentColor 8px, currentColor 9px, transparent 9px) repeat-x;
+        background-size: 20px 20px;
+        background-position: -10px calc(100% + 16px), 0 calc(100% - 4px);
+    }
+
+    .flow-wave {
+        animation: waveFlow 1s infinite linear;
+    }
+    @keyframes waveFlow {
+        from { background-position-x: -10px, 0; }
+        to { background-position-x: -30px, -20px; }
+    }
+
+    .end-text{
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #666666;
+    }
+}

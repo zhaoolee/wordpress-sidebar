@@ -21,7 +21,6 @@
     const host = window.location.origin;
     let sideBarStatus = [true];
     function showSidebar() {
-
         $('#wordpress-sidebar-container').css("left", "0px")
         sideBarStatus[0] = true;
         $('#website-index-icon').html("隐藏目录")
@@ -31,20 +30,15 @@
     function hideSidebar() {
         $('#wordpress-sidebar-container').css("left", "-200px")
         sideBarStatus[0] = false;
-
         $('#website-index-icon').html("显示目录")
-
     }
 
     const handleSidebar = () => {
-
-
         if (sideBarStatus[0] === true) {
             hideSidebar();
         } else {
             showSidebar();
         }
-
     }
 
     function postsDataListItemToHtml(postsDataListItem) {
@@ -57,13 +51,10 @@
                 ${postsDataListItem[m]["title"]["rendered"]}
               </p>
             </a>
-            
             `
         }
         return tmpResult
     }
-
-
 
     function scrollMethod(childid) {
 
@@ -175,8 +166,27 @@
         }
     }
 
+    // 展示Loading态
+
+    async function showLoading (){
+        
+
+    }
+
+
+    // 隐藏Loading态
+
+    async function hideLoading() {
+
+
+    }
+
+
+
 
     async function getSideBarData() {
+
+
         // 获取 categories信息
         return new Promise(async (resolve, reject) => {
             // 分类页数
@@ -194,16 +204,11 @@
                         success: (data) => {
                             // 如果能请求到新数据
                             if (data.length > 0) {
-
                                 categoriesInfoList = [...categoriesInfoList, ...data]
-
                                 // 判断获取的 categoriesInfoList 长度
-
                                 // 请求未完成的条件: 不为0, 且能被100整除 
                                 if (categoriesInfoList.length !== 0 && categoriesInfoList.length % categoriesPerPage === 0) {
-
                                     categoriesPage[0] = categoriesPage[0] + 1
-
                                 }
                                 // 请求完成的条件:  不能被100整除 
                                 else if (categoriesInfoList.length % categoriesPerPage !== 0) {
@@ -215,8 +220,6 @@
                             else {
                                 noGetAllCategoriesData = [false];
                             }
-
-
                             // 结束当前循环, 尝试进入下一个循环
                             currencyResolve();
 
@@ -229,9 +232,7 @@
                     })
 
                 })
-
             }
-
             resolve(categoriesInfoList);
         })
             // 基于categories信息, 获取categories内部的文章信息
@@ -298,8 +299,6 @@
 
     // 尝试获取时间戳信息
     // const wordPressSidbarInfoStr = window.localStorage.getItem("wordPressSidbarInfo");
-
-
     const wordPressSidbarInfoStr = await new Promise((resolve) => {
         localforage.getItem("wordPressSidbarInfo").then((data) => {
             console.log('=获取数据成功=>>', data);
@@ -326,8 +325,5 @@
             await getSideBarData();
         }
     }
-
-
-
 
 })();

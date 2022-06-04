@@ -1,0 +1,40 @@
+{
+  "name": "wordpress-sidebar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaoolee/wordpress-sidebar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhaoolee/wordpress-sidebar/issues"
+  },
+  "homepage": "https://github.com/zhaoolee/wordpress-sidebar#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "less": "^4.1.2",
+    "less-loader": "^11.0.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "localforage": "^1.10.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
