@@ -1,49 +1,47 @@
-#wordpress-sidebar-container{
+#wordpress-sidebar-container {
+  position: fixed;
+  top: 10vh;
+  left: 0vh;
+  z-index: 100;
+  width: 200px;
+  max-height: 80vh;
 
-    position: fixed;
-    top: 10vh;
-    left: 0vh;
-    z-index: 100;
+  .find-post-input {
     width: 200px;
-    max-height: 80vh;
-
-
-    .find-post-input{
-        width: 200px;
-        background-color: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(5px);
-        padding: 10px 10px 10px 10px;
-        border-top-right-radius: 10px;
-        border: 1px solid #cd2653;
-        
-    }
+    outline-style: none;
+    outline-width: 0px;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 10px 10px 10px 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid #cd2653;
+  }
 }
 
-#wordpress-sidebar-container-hide{
-    position: fixed;
-    top: 10vh;
-    left: -200px;
-    z-index: 100;
-    width: 200px;
-    max-height: 80vh;
-
+#wordpress-sidebar-container-hide {
+  position: fixed;
+  top: 10vh;
+  left: -200px;
+  z-index: 100;
+  width: 200px;
+  max-height: 80vh;
 }
 
-#website-index-icon{
-    width: 20px;
-    background-color: #cd2653;
-    display: inline-block;
-    position: absolute;
-    top: 10px;
-    right: -20px;
-    cursor: pointer;
-    color: #FFFFFF;
-    writing-mode: vertical-rl;
-    line-height: 20px;
-    text-align: center;
-    font-size: 16px;
-    letter-spacing: 4px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-
+#website-index-icon {
+  width: 20px;
+  background-color: #cd2653;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: -20px;
+  cursor: pointer;
+  color: #ffffff;
+  writing-mode: vertical-rl;
+  line-height: 20px;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  white-space: nowrap;
 }
