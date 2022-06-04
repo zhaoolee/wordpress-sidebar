@@ -51,16 +51,19 @@ WordPress是一个很优秀的建站工具, zhaoolee用WordPress建立了自己�
 ## 6. 拉取数据期间显示Loading
 
 
-![拉取数据期间显示Loading](https://cdn.fangyuanxiaozhan.com/assets/1654330940461TQz63MSM.png)
+![拉取数据期间显示Loading](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1654330998962SG72j4JY.png)
 
 
-## 7.添加Input搜索
+## 7. 添加Input搜索
 
 支持标题搜索, 输入关键词, 即可快速查找包含关键词的标题
 
-![添加Input](https://cdn.fangyuanxiaozhan.com/assets/1654330538860TFAMCpCN.gif)
+![添加Input](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/16543309998301y0pxiTK.gif)
+
+## 8. 字母大小写兼容匹配
 
 
+![大小写兼容匹配](https://cdn.fangyuanxiaozhan.com/assets/165433572359625pMz0RA.png)
 
 ## WordPress站长使用方法
 

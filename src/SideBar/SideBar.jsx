@@ -6,7 +6,7 @@ import $ from "jquery";
 let isRequest = [false];
 
 function SideBar(props) {
-  const windowLocationHref = window.location.href;
+  const windowLocationHref = window.location.origin + window.location.pathname;
   const [wordPressSidbarInfo, setWordPressSidbarInfo] = useState(null);
 
   const scrollMethod = (childid) => {
@@ -14,7 +14,7 @@ function SideBar(props) {
       let partotop = document.getElementById("wordpress-sidebar").offsetTop; //父元素到页面顶部距离
       let distance = document.getElementById(childid).offsetTop; //子元素到页面顶部的距离
       document.getElementById("wordpress-sidebar").scrollTop =
-        distance - partotop;
+        distance - partotop + 50;
     } catch (e) {
       console.log(e);
     }
@@ -131,7 +131,7 @@ function SideBar(props) {
                             postsDataCategoriesNameList:
                               postsDataCategoriesNameList,
                             timestamp: Date.parse(new Date()),
-                            version: "0.2"
+                            version: "0.2",
                           });
                         }
                       }
@@ -209,8 +209,8 @@ function SideBar(props) {
 
   const markKeyWord = (title) => {
     const markTitle = title.replaceAll(
-      props.keyWord,
-      `<span class="flow-wave key-word-style">${props.keyWord}</span>`
+      new RegExp(props.keyWord, "gi"),
+      `<span class="flow-wave key-word-style">${title.match(new RegExp(props.keyWord, "i"))}</span>`
     );
     return `<p>${markTitle}</p>`;
   };
@@ -276,9 +276,9 @@ function SideBar(props) {
                         <div
                           key={postData["link"]}
                           className={
-                            postData["title"]["rendered"].indexOf(
-                              props.keyWord
-                            ) === -1
+                            new RegExp(props.keyWord, "i").test(
+                              postData["title"]["rendered"]
+                            ) === false
                               ? "none-categories-a-list"
                               : "categories-a-list"
                           }

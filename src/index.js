@@ -20,9 +20,6 @@ function App() {
       // 搜索
 
   const findPostsInfo = (e)=>{
-
-    console.log('input==>>', e.target.value);
-
     setKeyWord(e.target.value);
 
   }
