@@ -5,29 +5,31 @@ WordPress是一个很优秀的建站工具, zhaoolee用WordPress建立了自己�
 
 2022年端午节更新, 用React重写所有逻辑, 新增Input搜索, Loading期间显示Loading标识, 为减少流量消耗, 改为60分钟更新一次数据;
 
-1. 支持手动隐藏显示侧边栏
-
-![支持手动隐藏显示侧边栏](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235463455PAsaB4sM.gif)
 
 
-2. 支持根据屏幕宽度判断显示/隐藏侧边目录(窗口宽度500px及以上显示侧边栏, 500px以下则隐藏侧边栏)
-
-![根据屏幕宽度判断显示/隐藏侧边目录](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235464695EZAtZcnf.gif)
+## 8. 字母大小写兼容匹配
 
 
-3. 侧边栏内容, 支持根据当前网址加深颜色, 并滚动到侧边栏顶部
+![大小写兼容匹配](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1654335756071D8KWZe5f.png)
 
 
-![支持根据当前网址加深颜色, 并滚动到侧边栏顶部](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235468796w4K5P5sr.gif)
+
+## 7. 添加Input搜索
+
+支持标题搜索, 输入关键词, 即可快速查找包含关键词的标题
+
+![添加Input](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/16543309998301y0pxiTK.gif)
 
 
-4. 支持缓存侧边栏数据, 首次加载后, 侧边栏秒显示, 为了节省流量, 每次打开新页面, 程序会检测时间戳, 过期时间, 侧边栏数据超过10分钟, 才会重新拉取
+
+## 6. 拉取数据期间显示Loading
 
 
-![支持缓存侧边栏数据](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235475702wCPhfHY4.png)
+![拉取数据期间显示Loading](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1654330998962SG72j4JY.png)
 
 
-5. 支持通过油猴(Tampermonkey)插件, 为任意WordPress站生成目录
+
+## 5. 支持通过油猴(Tampermonkey)插件, 为任意WordPress站生成目录
 
 
 ![为任意WordPress站生成目录](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235476209R6sf5745.png)
@@ -48,22 +50,30 @@ WordPress是一个很优秀的建站工具, zhaoolee用WordPress建立了自己�
 // ==/UserScript==
 ```
 
-## 6. 拉取数据期间显示Loading
+
+## 4. 支持缓存侧边栏数据, 首次加载后, 侧边栏秒显示, 为了节省流量, 每次打开新页面, 程序会检测时间戳, 过期时间, 侧边栏数据超过10分钟, 才会重新拉取
 
 
-![拉取数据期间显示Loading](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1654330998962SG72j4JY.png)
+![支持缓存侧边栏数据](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235475702wCPhfHY4.png)
+
+## 3. 侧边栏内容, 支持根据当前网址加深颜色, 并滚动到侧边栏顶部
 
 
-## 7. 添加Input搜索
-
-支持标题搜索, 输入关键词, 即可快速查找包含关键词的标题
-
-![添加Input](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/16543309998301y0pxiTK.gif)
-
-## 8. 字母大小写兼容匹配
+![支持根据当前网址加深颜色, 并滚动到侧边栏顶部](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235468796w4K5P5sr.gif)
 
 
-![大小写兼容匹配](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1654335756071D8KWZe5f.png)
+
+## 2. 支持根据屏幕宽度判断显示/隐藏侧边目录(窗口宽度500px及以上显示侧边栏, 500px以下则隐藏侧边栏)
+
+![根据屏幕宽度判断显示/隐藏侧边目录](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235464695EZAtZcnf.gif)
+
+
+
+## 1. 支持手动隐藏显示侧边栏
+
+![支持手动隐藏显示侧边栏](https://raw.githubusercontent.com/zhaoolee/wordpress-sidebar/master/README/1653235463455PAsaB4sM.gif)
+
+
 
 ## WordPress站长使用方法
 
