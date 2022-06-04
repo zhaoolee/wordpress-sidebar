@@ -5,6 +5,8 @@ import * as localforage from "localforage";
 import $ from "jquery";
 let isRequest = [false];
 
+const version = "0.2";
+
 function SideBar(props) {
   const windowLocationHref = window.location.origin + window.location.pathname;
   const [wordPressSidbarInfo, setWordPressSidbarInfo] = useState(null);
@@ -131,7 +133,7 @@ function SideBar(props) {
                             postsDataCategoriesNameList:
                               postsDataCategoriesNameList,
                             timestamp: Date.parse(new Date()),
-                            version: "0.2",
+                            version: version,
                           });
                         }
                       }
@@ -172,17 +174,37 @@ function SideBar(props) {
         isRequest[0] = true;
         getSideBarData();
       } else {
-        const localStorageTimestamp = wordPressSidbarInfo.timestamp;
-        const currentTimestamp = Date.parse(new Date());
 
-        props.setSideBarContent(true);
-        scrollMethod("current-page-index");
+        // 如果版本更新,清理数据重新请求
+        if(wordPressSidbarInfo.version !== version){
 
-        // 如果超过60分钟则重新进行请求
-        if (currentTimestamp - localStorageTimestamp > 60 * 60 * 1000) {
-          isRequest[0] = true;
-          getSideBarData();
+          localforage.removeItem("wordPressSidbarInfo");
+          if (
+            isRequest[0] === false
+          ) {
+            isRequest[0] = true;
+            getSideBarData();
+          }
+
+        } else {
+
+
+          const localStorageTimestamp = wordPressSidbarInfo.timestamp;
+          const currentTimestamp = Date.parse(new Date());
+  
+          props.setSideBarContent(true);
+          scrollMethod("current-page-index");
+  
+          // 如果超过60分钟则重新进行请求
+          if (currentTimestamp - localStorageTimestamp > 60 * 60 * 1000) {
+            isRequest[0] = true;
+            getSideBarData();
+          }
+
+
         }
+
+
       }
     }
   }, [wordPressSidbarInfo]);
