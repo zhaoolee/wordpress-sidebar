@@ -7,8 +7,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.js',
     },
-    mode: "development",
-    // mode: "production",
+    // mode: "development",
+    mode: "production",
     plugins: [
         new webpack.LoaderOptionsPlugin({
           minimize: true
