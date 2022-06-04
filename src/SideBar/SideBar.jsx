@@ -92,59 +92,58 @@ function SideBar(props) {
               let noGetAllPostsData = [true];
               let page = [1];
 
-
               while (noGetAllPostsData[0] === true) {
-                  await new Promise((resolveReq, reject) => {
-                    $.get({
-                      url:
-                        host +
-                        "/wp-json/wp/v2/posts?categories=" +
-                        categoriesData[p]["id"] +
-                        "&per_page=" +
-                        100 +
-                        "&page=" +
-                        `${page[0]}`,
-                      success: (postsData) => {
-                        postsDataList[p] = [
-                          ...(postsDataList[p] || []),
-                          ...postsData,
-                        ];
-                        // 如果postsDataList[p]值不能被100整除, 或者postsDataList[p] 长度为空, 则说明本标签请求完成
-                        if (
-                          postsDataList[p].length === 0 ||
-                          postsDataList[p].length % 100 !== 0
-                        ) {
-                          noGetAllPostsData[0] = [false];
-                          cNum.push(1);
-                          // 完成所有请求后执行
-                          if (cNum.length === categoriesLength) {
-                            for (let q = 0; q < postsDataList.length; q++) {
-                              if (postsDataList[q].length > 0) {
-                                postsDataCategoriesNameList.push(
-                                  categoriesData[q]["name"]
-                                );
-                                newPostsDataList.push(postsDataList[q]);
-                              }
+                await new Promise((resolveReq, reject) => {
+                  $.get({
+                    url:
+                      host +
+                      "/wp-json/wp/v2/posts?categories=" +
+                      categoriesData[p]["id"] +
+                      "&per_page=" +
+                      100 +
+                      "&page=" +
+                      `${page[0]}`,
+                    success: (postsData) => {
+                      postsDataList[p] = [
+                        ...(postsDataList[p] || []),
+                        ...postsData,
+                      ];
+                      // 如果postsDataList[p]值不能被100整除, 或者postsDataList[p] 长度为空, 则说明本标签请求完成
+                      if (
+                        postsDataList[p].length === 0 ||
+                        postsDataList[p].length % 100 !== 0
+                      ) {
+                        noGetAllPostsData[0] = [false];
+                        cNum.push(1);
+                        // 完成所有请求后执行
+                        if (cNum.length === categoriesLength) {
+                          for (let q = 0; q < postsDataList.length; q++) {
+                            if (postsDataList[q].length > 0) {
+                              postsDataCategoriesNameList.push(
+                                categoriesData[q]["name"]
+                              );
+                              newPostsDataList.push(postsDataList[q]);
                             }
-                            resolve({
-                              categoriesIdNameData: categoriesIdNameData,
-                              postsDataList: newPostsDataList,
-                              postsDataCategoriesNameList:
-                              postsDataCategoriesNameList,
-                              timestamp: Date.parse(new Date()),
-                            });
                           }
+                          resolve({
+                            categoriesIdNameData: categoriesIdNameData,
+                            postsDataList: newPostsDataList,
+                            postsDataCategoriesNameList:
+                              postsDataCategoriesNameList,
+                            timestamp: Date.parse(new Date()),
+                            version: "0.2"
+                          });
                         }
-                        // 如果postsDataList[p]值能被100整除, 则说明需要继续请求
-                        else {
-                          page[0] = 1 + page[0];
-                        }
-  
-                        resolveReq();
-                        
-                      },
-                    });
+                      }
+                      // 如果postsDataList[p]值能被100整除, 则说明需要继续请求
+                      else {
+                        page[0] = 1 + page[0];
+                      }
+
+                      resolveReq();
+                    },
                   });
+                });
               }
             }
           });
@@ -165,8 +164,7 @@ function SideBar(props) {
   }
 
   useEffect(() => {
-    if(wordPressSidbarInfo !== null){
-
+    if (wordPressSidbarInfo !== null) {
       if (
         Object.keys(wordPressSidbarInfo).length === 0 &&
         isRequest[0] === false
@@ -186,9 +184,7 @@ function SideBar(props) {
           getSideBarData();
         }
       }
-
     }
-
   }, [wordPressSidbarInfo]);
 
   useEffect(() => {
@@ -209,37 +205,32 @@ function SideBar(props) {
     });
   };
 
-
-
   // 为keyWord添加标识
 
-
-  const markKeyWord = (title)=>{
-
-    const markTitle = title.replaceAll(props.keyWord, `<span class="flow-wave key-word-style">${props.keyWord}</span>`)
-
-    return `<p>${markTitle}</p>`
-
-  }
-
-
-
-
+  const markKeyWord = (title) => {
+    const markTitle = title.replaceAll(
+      props.keyWord,
+      `<span class="flow-wave key-word-style">${props.keyWord}</span>`
+    );
+    return `<p>${markTitle}</p>`;
+  };
 
   return (
     <div id="wordpress-sidebar">
-      { console.log('!!!props', props)}
-      {wordPressSidbarInfo !== null && Object.keys(wordPressSidbarInfo).length !== 0 && props.keyWord.length === 0 && (
-        <div className="categories">
-          {wordPressSidbarInfo["postsDataCategoriesNameList"].map(
-            (categoriesName, CategoriesIdIndex) => {
-              return (
-                <>
-                  <div className="categories-title" id={categoriesName}>
-                    {categoriesName}
-                  </div>
-                  {wordPressSidbarInfo["postsDataList"][CategoriesIdIndex].map(
-                    (postData) => {
+      {wordPressSidbarInfo !== null &&
+        Object.keys(wordPressSidbarInfo).length !== 0 &&
+        props.keyWord.length === 0 && (
+          <div className="categories">
+            {wordPressSidbarInfo["postsDataCategoriesNameList"].map(
+              (categoriesName, CategoriesIdIndex) => {
+                return (
+                  <>
+                    <div className="categories-title" id={categoriesName}>
+                      {categoriesName}
+                    </div>
+                    {wordPressSidbarInfo["postsDataList"][
+                      CategoriesIdIndex
+                    ].map((postData) => {
                       return (
                         <div
                           key={postData["link"]}
@@ -262,31 +253,35 @@ function SideBar(props) {
                           </a>
                         </div>
                       );
-                    }
-                  )}
-                </>
-              );
-            }
-          )}
-        </div>
-      )}
+                    })}
+                  </>
+                );
+              }
+            )}
+          </div>
+        )}
 
-
-      {wordPressSidbarInfo !== null && Object.keys(wordPressSidbarInfo).length !== 0 && props.keyWord.length > 0 &&
-
-        <div className="categories">
-
-          {wordPressSidbarInfo["postsDataCategoriesNameList"].map(
-            (categoriesName, CategoriesIdIndex) => {
-              return (
-                <>
-                  {wordPressSidbarInfo["postsDataList"][CategoriesIdIndex].map(
-
-                    (postData) => {
+      {wordPressSidbarInfo !== null &&
+        Object.keys(wordPressSidbarInfo).length !== 0 &&
+        props.keyWord.length > 0 && (
+          <div className="categories">
+            {wordPressSidbarInfo["postsDataCategoriesNameList"].map(
+              (categoriesName, CategoriesIdIndex) => {
+                return (
+                  <>
+                    {wordPressSidbarInfo["postsDataList"][
+                      CategoriesIdIndex
+                    ].map((postData) => {
                       return (
                         <div
                           key={postData["link"]}
-                          className={postData["title"]["rendered"].indexOf(props.keyWord) === -1 ? "none-categories-a-list"  :  "categories-a-list"}
+                          className={
+                            postData["title"]["rendered"].indexOf(
+                              props.keyWord
+                            ) === -1
+                              ? "none-categories-a-list"
+                              : "categories-a-list"
+                          }
                         >
                           <a
                             id={
@@ -300,31 +295,28 @@ function SideBar(props) {
                                 : "other-page"
                             }
                             href={postData["link"]}
-                            
                           >
-                            <div dangerouslySetInnerHTML={{__html: markKeyWord(postData["title"]["rendered"])}}></div>
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: markKeyWord(
+                                  postData["title"]["rendered"]
+                                ),
+                              }}
+                            ></div>
                           </a>
                         </div>
                       );
-                    }
-                  )}
+                    })}
+                  </>
+                );
+              }
+            )}
 
-                  
-                </>
-              );
-            }
-          )}
-
-
-        <div className="end-text">
-          <span>── END ──</span>
-        </div>
-
-        </div>
-
-
-        
-      }
+            <div className="end-text">
+              <span>── END ──</span>
+            </div>
+          </div>
+        )}
     </div>
   );
 }
