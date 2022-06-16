@@ -35,6 +35,7 @@
     "jquery": "^3.6.0",
     "localforage": "^1.10.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-native-rss-parser": "^1.5.1"
   }
 }

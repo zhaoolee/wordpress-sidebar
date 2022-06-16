@@ -3,26 +3,26 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
 import SideBar from "./SideBar";
+import * as localforage from "localforage";
+let localWordPressSidbarInfo = {'data': null};
 
 function App() {
     const [websiteIndex, setWebsiteIndex] = useState(0);
-    const [sideBarContent, setSideBarContent] = useState(false);
+    const [sideBarContent, setSideBarContent] = useState( localWordPressSidbarInfo['data'] ? true : false);
     const [keyWord, setKeyWord] = useState('');
 
     // 根据屏幕初始宽度初始化 websiteIndex 状态
 
-    useEffect(()=>{
-        if(document.body.clientWidth >= 500){
+    useEffect(() => {
+        if (document.body.clientWidth >= 500) {
             setWebsiteIndex(1);
         }
     }, [])
+    // 搜索
+    const findPostsInfo = (e) => {
+        setKeyWord(e.target.value);
 
-      // 搜索
-
-  const findPostsInfo = (e)=>{
-    setKeyWord(e.target.value);
-
-  }
+    }
 
     return (
         <>
@@ -38,7 +38,7 @@ function App() {
                 <div id="wordpress-sidebar-container-hide">
                     <input className="find-post-input" placeholder="查找文章" value={keyWord} onChange={findPostsInfo} ></input>
                     <SideBar keyWord={keyWord} setSideBarContent={setSideBarContent} />
-                    <div id='website-index-icon' onClick={()=>{
+                    <div id='website-index-icon' onClick={() => {
                         setWebsiteIndex(1);
                     }}>显示目录</div>
                 </div>
@@ -49,7 +49,7 @@ function App() {
                 <div id="wordpress-sidebar-container">
                     <input className="find-post-input" placeholder="查找文章" value={keyWord} onChange={findPostsInfo} ></input>
                     <SideBar keyWord={keyWord} setSideBarContent={setSideBarContent} />
-                    <div id='website-index-icon' onClick={()=>{
+                    <div id='website-index-icon' onClick={() => {
                         setWebsiteIndex(0);
                     }}>隐藏目录</div>
                 </div>
@@ -58,10 +58,36 @@ function App() {
     )
 }
 
-// 添加一个div作为React的入口文件
-$("body").append(`<div id="wordpress-sidebar-container"/>`);
+async function initLocalDataAndRender (){
 
-ReactDOM.createRoot(document.getElementById("wordpress-sidebar-container")).render(<App />);
+    await new Promise((resolve, reject) => {
+
+        localforage.getItem("wordPressSidbarInfo").then((data) => {
+           if (data) {
+               localWordPressSidbarInfo['data'] = JSON.parse(data);
+               resolve(JSON.parse(data));
+           } else {
+               resolve(null);
+           }
+   
+       });
+   
+   }).then((data) => {
+   
+       // 添加一个div作为React的入口文件
+       $("body").append(`<div id="wordpress-sidebar-container"/>`);
+       ReactDOM.createRoot(document.getElementById("wordpress-sidebar-container")).render(<App />);
+   })
+
+};
+
+initLocalDataAndRender();
+
+
+
+
+
+
 
 
 

@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import "./SideBar.less";
 import * as localforage from "localforage";
 import $ from "jquery";
+
 let isRequest = [false];
 
 const version = "0.2";
+
 
 function SideBar(props) {
   const windowLocationHref = window.location.origin + window.location.pathname;
@@ -24,6 +26,7 @@ function SideBar(props) {
   async function getSideBarData() {
     console.log("!!开始获取新数据");
     const host = window.location.origin;
+
     // 获取 categories信息
     return (
       new Promise(async (resolve, reject) => {
@@ -157,6 +160,7 @@ function SideBar(props) {
           } catch (e) {
             console.log(e);
           }
+
           setWordPressSidbarInfo(data);
           setTimeout(() => {
             isRequest[0] = false;
@@ -176,7 +180,7 @@ function SideBar(props) {
       } else {
 
         // 如果版本更新,清理数据重新请求
-        if(wordPressSidbarInfo.version !== version){
+        if (wordPressSidbarInfo.version !== version) {
 
           localforage.removeItem("wordPressSidbarInfo");
           if (
@@ -191,12 +195,13 @@ function SideBar(props) {
 
           const localStorageTimestamp = wordPressSidbarInfo.timestamp;
           const currentTimestamp = Date.parse(new Date());
-  
+
+
           props.setSideBarContent(true);
           scrollMethod("current-page-index");
-  
+
           // 如果超过60分钟则重新进行请求
-          if (currentTimestamp - localStorageTimestamp > 60 * 60 * 1000) {
+          if (currentTimestamp - localStorageTimestamp >= 1000 * 60 *30 ) {
             isRequest[0] = true;
             getSideBarData();
           }
