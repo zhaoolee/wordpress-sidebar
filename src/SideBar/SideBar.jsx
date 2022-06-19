@@ -241,17 +241,9 @@ function SideBar(props) {
             getSideBarData();
           }
         } else {
-          // const localStorageTimestamp = wordPressSidbarInfo.timestamp;
-          // const currentTimestamp = Date.parse(new Date());
 
           props.setSideBarContent(true);
           scrollMethod("current-page-index");
-
-          // // 如果超过60分钟则重新进行请求
-          // if (currentTimestamp - localStorageTimestamp > 60 * 60 * 1000) {
-          //   isRequest[0] = true;
-          //   getSideBarData();
-          // }
 
           // 如果文章有更新则进行请求
 
@@ -270,7 +262,9 @@ function SideBar(props) {
     await new Promise((resolve) => {
       localforage.getItem("wordPressSidbarInfo").then((data) => {
         if (data === null) {
+          props.setSideBarContent(false);
           setWordPressSidbarInfo({});
+          
         } else {
           setWordPressSidbarInfo(JSON.parse(data));
         }
