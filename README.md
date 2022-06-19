@@ -3,8 +3,7 @@
 
 WordPress是一个很优秀的建站工具, zhaoolee用WordPress建立了自己的博客网站v2fy.com (Way To 方圆) , 对于个人博客而言, GitBook的侧边栏文章目录, 非常适合广大读者阅读, 于是我研究了一下WordPress的开放api接口, 然后写了个工具, 可以使用纯前端的方式, 以WordPress标准Api获取数据, 构建一个类似GitBook的侧边目录;
 
-2022年端午节更新, 用React重写所有逻辑, 新增Input搜索, Loading期间显示Loading标识, 为减少流量消耗, 改为60分钟更新一次数据;
-
+2022年端午节更新, 用React重写所有逻辑, 新增Input搜索, Loading期间显示Loading标识, 为减少流量消耗, ~~改为60分钟更新一次数据~~, 改为通过最后一篇文章的title和url判断是否需求更新列表
 
 
 ## 8. 字母大小写兼容匹配
