@@ -6,6 +6,32 @@ import $ from "jquery";
 let isRequest = [false];
 
 const version = "0.2";
+const host = window.location.origin;
+
+
+// 获取最新的文章题目和url
+
+const getLastPostInfo = async () => {
+  let result = "";
+  result = await new Promise((currencyResolve, currencyReject) => {
+    $.get({
+      url: host+`/wp-json/wp/v2/posts?page=1`,
+      success: (data) => {
+        // 如果能请求到新数据
+        if (data.length > 0) {
+          console.log("最新文章==", data[0]);
+          currencyResolve(data[0]["title"]['rendered'] + data[0]["link"]);
+        }
+      },
+      fail: () => {
+        console.log("此网站无法生成wordpress阅读列表==", data);
+        reject(data);
+      },
+    });
+  });
+
+  return result;
+};
 
 function SideBar(props) {
   const windowLocationHref = window.location.origin + window.location.pathname;
@@ -23,7 +49,7 @@ function SideBar(props) {
   };
   async function getSideBarData() {
     console.log("!!开始获取新数据");
-    const host = window.location.origin;
+    
     // 获取 categories信息
     return (
       new Promise(async (resolve, reject) => {
@@ -105,7 +131,7 @@ function SideBar(props) {
                       100 +
                       "&page=" +
                       `${page[0]}`,
-                    success: (postsData) => {
+                    success:  async(postsData) => {
                       postsDataList[p] = [
                         ...(postsDataList[p] || []),
                         ...postsData,
@@ -127,11 +153,14 @@ function SideBar(props) {
                               newPostsDataList.push(postsDataList[q]);
                             }
                           }
+                          // 获取最新的文章信息
+                          const lastPostInfo = await getLastPostInfo();
+
                           resolve({
                             categoriesIdNameData: categoriesIdNameData,
                             postsDataList: newPostsDataList,
-                            postsDataCategoriesNameList:
-                              postsDataCategoriesNameList,
+                            postsDataCategoriesNameList,
+                            lastPostInfo,
                             timestamp: Date.parse(new Date()),
                             version: version,
                           });
@@ -165,6 +194,36 @@ function SideBar(props) {
     );
   }
 
+  // 如果文章有更新就进行请求
+
+  const tryToUpdate = async (wordPressSidbarInfo) => {
+    const localLastlastPostInfo = wordPressSidbarInfo.lastPostInfo || "" ;
+
+    const lastlastPostInfo = await getLastPostInfo();
+
+    console.log('===实时lastlastPostInfo==', lastlastPostInfo);
+
+    if (localLastlastPostInfo !== lastlastPostInfo) {
+      console.log(
+        "localLastlastPostInfo",
+        localLastlastPostInfo,
+        "与lastlastPostInfo",
+        lastlastPostInfo,
+        "不同!开始更新"
+      );
+      isRequest[0] = true;
+      getSideBarData();
+    } else {
+      console.log(
+        "localLastlastPostInfo",
+        localLastlastPostInfo,
+        "与lastlastPostInfo",
+        lastlastPostInfo,
+        "相同， 无需更新"
+      );
+    }
+  };
+
   useEffect(() => {
     if (wordPressSidbarInfo !== null) {
       if (
@@ -174,37 +233,30 @@ function SideBar(props) {
         isRequest[0] = true;
         getSideBarData();
       } else {
-
         // 如果版本更新,清理数据重新请求
-        if(wordPressSidbarInfo.version !== version){
-
+        if (wordPressSidbarInfo.version !== version) {
           localforage.removeItem("wordPressSidbarInfo");
-          if (
-            isRequest[0] === false
-          ) {
+          if (isRequest[0] === false) {
             isRequest[0] = true;
             getSideBarData();
           }
-
         } else {
+          // const localStorageTimestamp = wordPressSidbarInfo.timestamp;
+          // const currentTimestamp = Date.parse(new Date());
 
-
-          const localStorageTimestamp = wordPressSidbarInfo.timestamp;
-          const currentTimestamp = Date.parse(new Date());
-  
           props.setSideBarContent(true);
           scrollMethod("current-page-index");
-  
-          // 如果超过60分钟则重新进行请求
-          if (currentTimestamp - localStorageTimestamp > 60 * 60 * 1000) {
-            isRequest[0] = true;
-            getSideBarData();
-          }
 
+          // // 如果超过60分钟则重新进行请求
+          // if (currentTimestamp - localStorageTimestamp > 60 * 60 * 1000) {
+          //   isRequest[0] = true;
+          //   getSideBarData();
+          // }
 
+          // 如果文章有更新则进行请求
+
+          tryToUpdate(wordPressSidbarInfo);
         }
-
-
       }
     }
   }, [wordPressSidbarInfo]);
@@ -232,7 +284,9 @@ function SideBar(props) {
   const markKeyWord = (title) => {
     const markTitle = title.replaceAll(
       new RegExp(props.keyWord, "gi"),
-      `<span class="flow-wave key-word-style">${title.match(new RegExp(props.keyWord, "i"))}</span>`
+      `<span class="flow-wave key-word-style">${title.match(
+        new RegExp(props.keyWord, "i")
+      )}</span>`
     );
     return `<p>${markTitle}</p>`;
   };

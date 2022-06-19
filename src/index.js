@@ -5,25 +5,21 @@ import './index.less';
 import SideBar from "./SideBar";
 
 function App() {
+
+    let initSideBarContent = false;
     const [websiteIndex, setWebsiteIndex] = useState(0);
-    const [sideBarContent, setSideBarContent] = useState(false);
+    const [sideBarContent, setSideBarContent] = useState(initSideBarContent);
     const [keyWord, setKeyWord] = useState('');
-
     // 根据屏幕初始宽度初始化 websiteIndex 状态
-
-    useEffect(()=>{
-        if(document.body.clientWidth >= 500){
+    useEffect(() => {
+        if (document.body.clientWidth >= 500) {
             setWebsiteIndex(1);
         }
     }, [])
-
-      // 搜索
-
-  const findPostsInfo = (e)=>{
-    setKeyWord(e.target.value);
-
-  }
-
+    // 搜索
+    const findPostsInfo = (e) => {
+        setKeyWord(e.target.value);
+    }
     return (
         <>
             {/* 加载中... */}
@@ -38,7 +34,7 @@ function App() {
                 <div id="wordpress-sidebar-container-hide">
                     <input className="find-post-input" placeholder="查找文章" value={keyWord} onChange={findPostsInfo} ></input>
                     <SideBar keyWord={keyWord} setSideBarContent={setSideBarContent} />
-                    <div id='website-index-icon' onClick={()=>{
+                    <div id='website-index-icon' onClick={() => {
                         setWebsiteIndex(1);
                     }}>显示目录</div>
                 </div>
@@ -49,7 +45,7 @@ function App() {
                 <div id="wordpress-sidebar-container">
                     <input className="find-post-input" placeholder="查找文章" value={keyWord} onChange={findPostsInfo} ></input>
                     <SideBar keyWord={keyWord} setSideBarContent={setSideBarContent} />
-                    <div id='website-index-icon' onClick={()=>{
+                    <div id='website-index-icon' onClick={() => {
                         setWebsiteIndex(0);
                     }}>隐藏目录</div>
                 </div>
